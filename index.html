@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON API</title>
+</head>
+<body>
+    <h1>JSON API</h1>
+    <button id="storeBtn">Store JSON</button>
+    <button id="retrieveBtn">Retrieve JSON</button>
+
+    <h2>Stored JSON Data</h2>
+    <pre id="jsonData"></pre>
+
+    <script>document.getElementById('storeBtn').addEventListener('click', () => {
+            const jsonData = {
+                name: "John",
+                age: 30,
+                city: "New York"
+            };
+
+            fetch('https://hamiltoncollegeprehealthplanning.duckdns.org:3000/store-json', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ data: jsonData })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    alert('Data Stored');
+                    console.log(data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+
+        document.getElementById('retrieveBtn').addEventListener('click', () => {
+            fetch('https://hamiltoncollegeprehealthplanning.duckdns.org:3000/get-json')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('jsonData').textContent = JSON.stringify(data, null, 2);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });</script>
+</body>
+</html>
