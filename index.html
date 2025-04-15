@@ -94,11 +94,11 @@
             const database = await getDatabase();
             console.log(database)
     
-            const courses = database[13].data.courses;
+            const courses = database[12].data.courses;
 
             if (!courses.includes(course)) {
                 courses.push(course);
-                database[13].data.courses = courses;
+                database[12].data.courses = courses;
                 await updateDatabase(database);
             } else {
                 alert('Course already exists.');
@@ -107,11 +107,11 @@
 
         async function addTrack(track) {
             const database = await getDatabase();
-            const tracks = database[13].data.tracks;
+            const tracks = database[12].data.tracks;
 
             if (!tracks.includes(track)) {
                 tracks.push(track);
-                database[13].data.tracks = tracks;
+                database[12].data.tracks = tracks;
                 await updateDatabase(database);
             } else {
                 alert('Track already exists.');
@@ -120,11 +120,11 @@
 
         async function addMajor(major) {
             const database = await getDatabase();
-            const majors = database[13].data.majors;
+            const majors = database[12].data.majors;
 
             if (!majors.includes(major)) {
                 majors.push(major);
-                database[13].data.majors = majors;
+                database[12].data.majors = majors;
                 await updateDatabase(database);
             } else {
                 alert('Major already exists.');
