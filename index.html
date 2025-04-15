@@ -15,9 +15,10 @@
 
     <script>document.getElementById('storeBtn').addEventListener('click', () => {
             const jsonData = {
-                name: "TESTING HELO",
-                age: 30,
-                city: "PLEASE WORK"
+                students: [],
+                courses: [],
+                majors: [],
+                tracks: []
             };
 
             fetch('https://hamiltoncollegeprehealthplanning.duckdns.org:3000/store-json', {
