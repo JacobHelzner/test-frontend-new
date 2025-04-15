@@ -92,6 +92,8 @@
 
         async function addCourse(course) {
             const database = await getDatabase();
+            console.log(database)
+    
             const courses = database[13].data.courses;
 
             if (!courses.includes(course)) {
