@@ -35,15 +35,14 @@
         }
 
         function getDatabase() {
-            fetch('https://hamiltoncollegeprehealthplanning.duckdns.org:3000/get-json')
+            return fetch('https://hamiltoncollegeprehealthplanning.duckdns.org:3000/get-json')
                 .then(response => response.json())
-                .then(data => {
-                    return data;
-                })
                 .catch(error => {
                     console.error('Error:', error);
-                });
+                return []; // Return an empty array in case of an error
+            });
         }
+
         
         document.getElementById('storeBtn').addEventListener('click', () => {
             const jsonData = {
@@ -56,7 +55,9 @@
         });
 
         document.getElementById('retrieveBtn').addEventListener('click', () => {
-            document.getElementById('jsonData').textContent = JSON.stringify(getDatabase(), null, 2);
+            getDatabase().then(data => {
+                document.getElementById('jsonData').textContent = JSON.stringify(data, null, 2);
+            });
         });</script>
     <h1>Add Data to Database</h1>
 
