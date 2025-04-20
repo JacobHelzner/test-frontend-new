@@ -13,20 +13,16 @@
     <h2>Stored JSON Data</h2>
     <pre id="jsonData"></pre>
 
-    <script>document.getElementById('storeBtn').addEventListener('click', () => {
-            const jsonData = {
-                students: [],
-                courses: [],
-                majors: [],
-                tracks: []
-            };
+    <script>
+        
+        function saveDatabase(database) {
 
             fetch('https://hamiltoncollegeprehealthplanning.duckdns.org:3000/store-json', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ data: jsonData })
+                body: JSON.stringify({ data: database })
             })
                 .then(response => response.json())
                 .then(data => {
@@ -36,17 +32,31 @@
                 .catch(error => {
                     console.error('Error:', error);
                 });
-        });
+        }
 
-        document.getElementById('retrieveBtn').addEventListener('click', () => {
+        function getDatabase() {
             fetch('https://hamiltoncollegeprehealthplanning.duckdns.org:3000/get-json')
                 .then(response => response.json())
                 .then(data => {
-                    document.getElementById('jsonData').textContent = JSON.stringify(data, null, 2);
+                    return data;
                 })
                 .catch(error => {
                     console.error('Error:', error);
                 });
+        }
+        
+        document.getElementById('storeBtn').addEventListener('click', () => {
+            const jsonData = {
+                students: [],
+                courses: [],
+                majors: [],
+                tracks: []
+            };
+            saveDatabase(jsonData);
+        });
+
+        document.getElementById('retrieveBtn').addEventListener('click', () => {
+            document.getElementById('jsonData').textContent = JSON.stringify(getDatabase(), null, 2);
         });</script>
     <h1>Add Data to Database</h1>
 
